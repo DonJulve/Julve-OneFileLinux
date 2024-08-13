@@ -4,6 +4,11 @@
 ## Installacion
 Se instala de la misma forma que instalarías un .efi
 
+## Fotos del resultado final
+![overview1](/assets/overview1.jpg "overview1")
+
+![overview2](/assets/overview2.jpg "overview2")
+
 ## Compilación personal / actualización
 > Usa https://pkgs.alpinelinux.org/contents para saber si los paquetes a instalar en la compilación son compatibles.
 
