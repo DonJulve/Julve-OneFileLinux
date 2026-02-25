@@ -2,6 +2,12 @@
 
 set -e
 
+# Verificar si se ejecuta como root
+if [ "$EUID" -ne 0 ]; then
+  echo "Por favor, ejecuta este script como root (sudo ./04_build.sh)"
+  exit 1
+fi
+
 # RootFS variables
 ROOTFS="alpine-minirootfs"
 CACHEPATH="$ROOTFS/var/cache/apk/"

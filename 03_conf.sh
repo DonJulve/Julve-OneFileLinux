@@ -1,4 +1,10 @@
-#/bin/bash
+#!/bin/bash
+
+# Verificar si se ejecuta como root
+if [ "$EUID" -ne 0 ]; then
+  echo "Por favor, ejecuta este script como root (sudo ./03_conf.sh)"
+  exit 1
+fi
 
 ln -s /etc/init.d/mdev ./alpine-minirootfs/etc/runlevels/sysinit/mdev
 ln -s /etc/init.d/devfs ./alpine-minirootfs/etc/runlevels/sysinit/devfs
@@ -52,6 +58,11 @@ chmod +x ./alpine-minirootfs/usr/bin/fontsize
 mkdir -p alpine-minirootfs/lib/
 tar -C alpine-minirootfs/lib/ -xf zfiles/firmware.tar.xz
 cp zfiles/.config linux/
+
+# Parche de compatibilidad para GCC 15 (evita conflicto con C23)
+echo "Aplicando parches de compatibilidad para GCC 15..."
+sed -i 's/KBUILD_CFLAGS := -m$(BITS) -O2 $(CLANG_FLAGS)/KBUILD_CFLAGS := -m$(BITS) -O2 $(CLANG_FLAGS) -std=gnu11/' linux/arch/x86/boot/compressed/Makefile
+sed -i 's/KBUILD_CFLAGS[[:space:]]*:= $(subst $(CC_FLAGS_FTRACE),,$(cflags-y)) \\/KBUILD_CFLAGS			:= $(subst $(CC_FLAGS_FTRACE),,$(cflags-y)) -std=gnu11 \\/' linux/drivers/firmware/efi/libstub/Makefile
 
 cd linux
 make menuconfig

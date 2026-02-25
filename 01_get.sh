@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 alpineminirootfsfile="alpine-minirootfs-3.16.0-x86_64.tar.gz"
 linuxver="linux-6.10"
