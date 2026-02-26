@@ -2,7 +2,7 @@
 > Este es un sistema operativo linux optimizado creado por mi y con la herramienta aircrack integrada, pesa tan solo 42 megas y está construido a partir de la versión 3.16.0 de alpine linux con el kernel vanilla 6.10
 
 ## Installacion
-Se instala de la misma forma que instalarías un .efi
+En un USB pon el archivo BOOTx64.efi en /EFI/BOOT/ (Deberás crear dichas carpetas en caso de no tenerlas)
 
 ## Fotos del resultado final
 ![overview1](/assets/overview1.jpg "overview1")
@@ -31,7 +31,15 @@ Estos paquetes se instalan durante el paso 2 y forman parte del sistema Julve-On
 *   `nano`, `mc`, `htop`, `dropbear`.
 
 ---
+### Build
 
+#### Automática
+Ejecuta `auto.sh` con privilegios de root
+```shell
+sudo ./auto.sh
+```
+
+#### Manual
 1. Ejecuta `01_get.sh` (Modifica las rutas para usar otras versiones de alpine o el kernel)
 
 ```shell
